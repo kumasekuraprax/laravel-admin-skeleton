@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "anluizmm/laravel-admin-skeleton",
+    "description": "Estrutura completa para BackOffice, utilizando Laravel com AdminLTE + Controles em ACL + Docker",
+    "keywords": ["zerodawn", "laravel-admin-skeleton "],
     "license": "MIT",
     "type": "project",
     "require": {
