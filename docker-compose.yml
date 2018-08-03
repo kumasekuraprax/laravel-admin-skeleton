@@ -1,8 +1,8 @@
-web_groot:
+web_zerodawn:
     image: nginx:latest
     privileged: true
     ports:
-        - 80:80
+        - 8881:80
     volumes_from:
         - php
     volumes:
@@ -28,6 +28,7 @@ php:
     privileged: true
     links:
         - redis
+        - mysql
     environment:
         REDIS_HOST: redis
         REDIS_PORT: 6379
@@ -41,3 +42,13 @@ redis:
     ports:
       - 6379:6379
     mem_limit: 1g
+
+mysql:
+    image: mysql:latest
+    ports:
+        - "3306:3306"
+    volumes:
+        - data:/var/lib/mysql
+    environment:
+        - MYSQL_ROOT_PASSWORD=mydbroot
+        - MYSQL_DATABASE=zerodawn
