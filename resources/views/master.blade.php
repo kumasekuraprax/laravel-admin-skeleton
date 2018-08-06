@@ -14,7 +14,8 @@
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('css/fontawesome/font-awesome.min.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/fontawesome/font-awesome.min.css') }}"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('css/ionicons/ionicons.min.css') }}">
 

@@ -111,7 +111,7 @@ return [
         [
             'text'      => 'DASHBORAD',
             'route'     => 'dashboard',
-            'icon'      => 'dashboard',
+            'icon'      => 'tachometer-alt',
             'can'       => 'menu-superadmin'
         ],
 
@@ -126,13 +126,13 @@ return [
             'submenu'   => [
                 [
                     'text'      => 'Usuários',
-                    'route'     => 'usuario',
-                    'icon'      => 'circle-o'
+                    'route'     => 'usuarios.index',
+                    'icon'      => 'circle-notch'
                 ],
                 [
                     'text'      => 'ACL',
-                    'route'     => 'acl',
-                    'icon'      => 'circle-o'
+                    'route'     => 'acl.index',
+                    'icon'      => 'circle-notch'
                 ]
             ],
         ]

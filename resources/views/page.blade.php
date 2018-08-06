@@ -12,6 +12,8 @@
     'top-nav' => 'layout-top-nav'
 ][config('adminlte.layout')] : '') . (config('adminlte.collapse_sidebar') ? ' sidebar-collapse ' : ''))
 
+@php $adminlte = config('adminlte') @endphp
+
 @section('body')
     <div class="wrapper">
         <header class="main-header">
@@ -29,7 +31,7 @@
 
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">
-                            @each('partials.menu-item-top-nav', $adminlte->menu(), 'item')
+                            @each('partials.menu-item-top-nav', $adminlte['menu'], 'item')
                         </ul>
                     </div>
             @else
@@ -44,7 +46,7 @@
 
             <nav class="navbar navbar-static-top" role="navigation">
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                    <span class="sr-only">{{ trans('adminlte.toggle_navigation') }}</span>
+                    <i class="fa fa-bars"></i>
                 </a>
             @endif
                 <div class="navbar-custom-menu">
@@ -78,7 +80,7 @@
                                 
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{ route('detalhes-usuario', Auth::id()) }}" class="btn btn-default btn-flat">Meus Dados</a>
+                                        <a href="{{ route('usuarios.show', Auth::id()) }}" class="btn btn-default btn-flat">Meus Dados</a>
                                     </div>
                                     <div class="pull-right">
                                         <a class="btn btn-danger btn-flat" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -106,7 +108,7 @@
         <aside class="main-sidebar">
             <section class="sidebar">
                 <ul class="sidebar-menu" data-widget="tree">
-                    @each('partials.menu-item', $adminlte->menu(), 'item')
+                    @each('partials.menu-item', $adminlte['menu'], 'item')
                 </ul>
             </section>
         </aside>

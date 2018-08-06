@@ -6,7 +6,7 @@ web_zerodawn:
     volumes_from:
         - php
     volumes:
-        - ./env/nginx/mm_groot.dev.conf:/etc/nginx/conf.d/default.conf
+        - ./env/nginx/zerodawn.conf:/etc/nginx/conf.d/default.conf
         - ./env/nginx/custom.ini:/usr/local/etc/php/conf.d/custom.ini
     links:
         - php
@@ -33,7 +33,7 @@ php:
         REDIS_HOST: redis
         REDIS_PORT: 6379
     volumes:
-        - ./:/var/www/mm_groot
+        - ./:/var/www/aloy
         - ../tardis/:/var/www/tardis
         - ./env/nginx/custom.ini:/usr/local/etc/php/conf.d/custom.ini
 
@@ -44,11 +44,11 @@ redis:
     mem_limit: 1g
 
 mysql:
-    image: mysql:latest
+    image: mysql:5.7
     ports:
-        - "3306:3306"
+        - 3306:3306
     volumes:
-        - data:/var/lib/mysql
+        - db_data:/var/lib/mysql
     environment:
         - MYSQL_ROOT_PASSWORD=mydbroot
         - MYSQL_DATABASE=zerodawn

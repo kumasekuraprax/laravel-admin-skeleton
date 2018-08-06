@@ -1,6 +1,12 @@
-@if (is_string($item))
-    <li class="header">{{ $item }}</li>
+@if (array_key_exists("header", $item))
+    <li class="header">{{ $item['header'] }}</li>
 @else
+    @php
+        $item['href'] = isset($item['route']) ? route($item['route']) : (isset($item['url']) ? $item['url'] : "#");
+        $item['class'] = isset($item['submenu']) ? 'treeview' : "";
+        $item['submenu_class'] = isset($item['submenu']) ? 'treeview-menu' : "";
+    @endphp
+
     <li class="{{ $item['class'] }}">
         <a href="{{ $item['href'] }}"
            @if (isset($item['target'])) target="{{ $item['target'] }}" @endif
@@ -20,7 +26,7 @@
         </a>
         @if (isset($item['submenu']))
             <ul class="{{ $item['submenu_class'] }}">
-                @each('adminlte::partials.menu-item', $item['submenu'], 'item')
+                @each('partials.menu-item', $item['submenu'], 'item')
             </ul>
         @endif
     </li>

@@ -23,7 +23,8 @@ Auth::routes();
 Route::get('/', function () {
     return redirect(config('app.tardis_url') . "login/" . config('app.tardis_request'));
 });
-Route::post('/tardis/access', 'Access\TardisController@valida');
+Route::post('/tardis/valida', 'Access\TardisController@valida');
+Route::get('/tardis/valida', 'Access\TardisController@valida');
 Route::get('/tardis/usuarios/{cpf}/update-password', 'Access\TardisController@updatePassword')->name('tardis-update-password');
 
 
