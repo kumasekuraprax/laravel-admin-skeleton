@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('page')
 
 @section('title')
 Admin - ACL (Controle de Acessos)

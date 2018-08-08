@@ -7,7 +7,7 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class UsuarioEntity extends Controller
+class UsuarioEntity
 {
     /**
      * Create or update a User

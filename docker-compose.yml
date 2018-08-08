@@ -33,7 +33,7 @@ php:
         REDIS_HOST: redis
         REDIS_PORT: 6379
     volumes:
-        - ./:/var/www/aloy
+        - ./:/var/www/zerodawn
         - ../tardis/:/var/www/tardis
         - ./env/nginx/custom.ini:/usr/local/etc/php/conf.d/custom.ini
 

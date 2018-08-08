@@ -8,7 +8,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AclEntity extends Controller
+class AclEntity
 {
     /**
      * Create or update a User

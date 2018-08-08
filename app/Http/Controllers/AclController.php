@@ -62,13 +62,16 @@ class AclController extends Controller
             $response = $aclEntity->save($request->all(), 'create');
 
             if ($response['status']) {
-                return redirect()->route('acl.edit', $response['id'])->with('success', ucfirst($request->type) . ' criado com sucesso!');
+                return response()->json($response);
+                // return redirect()->route('acl.edit', $response['id'])->with('success', ucfirst($request->type) . ' criado com sucesso!');
             } else {
                 throw new Exception($response);
             }
         } catch (Exception $e) {
             report($e);
-            return redirect()->route('acl.index')->with('danger', 'Não foi possivel criar a ' . ucfirst($request->type) . '!');
+
+            return response()->json(['status' => false]);
+            // return redirect()->route('acl.index')->with('danger', 'Não foi possivel criar a ' . ucfirst($request->type) . '!');
         }
     }
 

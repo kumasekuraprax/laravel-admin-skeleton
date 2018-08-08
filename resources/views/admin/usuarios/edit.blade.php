@@ -28,10 +28,10 @@ Admin - Editar Usuário {{ $usuario->nome }}
 <div class="box box-success">
     {{ Form::hidden('id', $usuario->id) }}
 
-    {{ Form::open(['url' => '/admin/usuarios/' . $usuario->id, 'method' => 'PUT']) }}
+    {{ Form::open(['route' => ['usuarios.update', $usuario->id], 'method' => 'PUT']) }}
     <div class="box-header with-border">
         <h4>
-            Editando Usuário | {{ $usuario->nome }} - {{ $usuario->permissao->nome }}
+            Editando Usuário | {{ $usuario->nome }}
             <span class="pull-right-container">
                 <a href="{{ route('usuarios.index') }}" class="btn btn-default btn-flat pull-right">
                     CANCELAR
@@ -62,7 +62,7 @@ Admin - Editar Usuário {{ $usuario->nome }}
 
                 <div class="form-group">
                     <label>Função</label>
-                    {{ Form::select('funcao[]', $roles, array_keys($usuario->getRoles()), ['class' => 'form-control', 'required', 'multiple']) }}
+                    {{ Form::select('funcao[]', $roles, array_keys($usuario->getRoles()), ['class' => 'form-control select2', 'required', 'multiple']) }}
                 </div>
 
                 <div class="form-group">
@@ -73,7 +73,7 @@ Admin - Editar Usuário {{ $usuario->nome }}
             <div class="col-md-8 col-md-offset-2">
                 <h4 align="center">Permissões do usuário</h4><hr>
 
-                @foreach($permissoes as $permissao)
+                @foreach($permissions as $permissao)
                     @php $can = $permissao->name; @endphp
                     <div class="col-md-4">
                         <label>

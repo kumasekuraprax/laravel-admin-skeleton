@@ -65,7 +65,7 @@ class UsuarioController extends Controller
         return view('admin.usuarios.edit', [
             'usuario' => Usuario::findOrFail($id),
             'permissions' => Permission::whereInheritId(null)->get(),
-            'roles' => Role::all()
+            'roles' => Role::pluck('name', 'id')
         ]);
     }
 

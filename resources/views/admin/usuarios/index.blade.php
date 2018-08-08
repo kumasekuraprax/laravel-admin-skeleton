@@ -1,16 +1,14 @@
-@extends('adminlte::page')
+@extends('page')
 
 @section('title')
 Admin - Usuários
 @stop
 
 @section('css')
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<!-- CSS especifico da view -->
 @stop
 
 @section('js')
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<script type="text/javascript" src="{{ asset('js/admin/datatable.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/admin/usuarios.js') }}"></script>
 @stop
 
@@ -39,15 +37,6 @@ Admin - Usuários
 
     <div class="box-body">
         <div class="row">
-            <div class="col-md-10"></div>
-            <div class="col-md-2">
-                <form class="form" id="busca_usuarios">
-                    <div class="form-group">
-                        <input class="form-control" id="searchUser" type="search" name="q" placeholder="Pesquisa ..." title="Tecle enter para buscar" data-toggle="tooltip">
-                    </div>
-                </form>
-            </div>
-
             <div class="col-md-12">
                 <div class="table-responsive">
                     <table class="table no-margin" id="lista_usuarios">
@@ -63,12 +52,16 @@ Admin - Usuários
                         <tbody>
                             @foreach($usuarios as $user)
                                 <tr>
-                                    <td> {{ $user->id }} </td>
-                                    <td> {{ $user->nome }} </td>
-                                    <td> {{ $user->email }} </td>
-                                    <td> {{ $user->getRoles() }} </td>
-                                    <td>
-                                        <a href="{{ route('usuarios.edit', $user->id) }}" class="btn btn-flat btn-primary">
+                                    <td style="width: 4%;"> {{ $user->id }} </td>
+                                    <td style="width: 16%;"> {{ $user->nome }} </td>
+                                    <td  style="width: 20%;"> {{ $user->email }} </td>
+                                    <td> 
+                                        @foreach($user->getRoles() as $role) 
+                                            <label class="label label-default"> {{ ucfirst($role) }} </label>
+                                        @endforeach
+                                    </td>
+                                    <td style="width: 10%;">
+                                        <a href="{{ route('usuarios.edit', $user->id) }}" class="btn btn-sm btn-flat btn-block btn-primary">
                                             <i class="fa fa-edit"></i> EDITAR
                                         </a>
                                     </td>
@@ -112,8 +105,7 @@ Admin - Usuários
                     </button>
                     <div id="panel-dados-fornecedor" class="panel-dados">
                         <div class="row">
-                            {{ Form::open(['route' => 'usuario', 'method' => 'put', 'id' => 'envia-novo-usuario']) }}
-
+                            {{ Form::open(['route' => 'usuarios.store', 'method' => 'POST', 'id' => 'envia-novo-usuario']) }}
                                 <div id="form-style" class="form-group">
                                     <div class="col-md-6">
                                         <label>Nome do Usuário <span id="msg" class="label"></span></label><br>
@@ -132,7 +124,7 @@ Admin - Usuários
 
                                     <div class="col-md-6">
                                         <label>Tipo de Usuário</label> <br>
-                                        {{ Form::select('permissao', $data['permissoes'], null, ['class' => 'form-control', 'id' => 'permissao']) }}
+                                        {{ Form::select('permissao', $roles, null, ['class' => 'form-control', 'id' => 'permissao']) }}
                                     </div>
 
                                     <div class="col-md-12 hide" id="box-permissao"></div>
@@ -174,7 +166,7 @@ Admin - Usuários
                 <span id="MessageDelete"></span>
 
                 <span class="pull-right-container">
-                    {{ Form::open(['route' => 'usuario', 'method' => 'delete', 'id' => 'deletar_usuario']) }}
+                    {{ Form::open(['url' => null, 'method' => 'delete', 'id' => 'deletar_usuario']) }}
                         {{ Form::hidden('del_user') }}
                         {{ Form::button('EXCLUIR', ['name' => 'deletar', 'class' => 'btn btn-flat btn-danger pull-right', 'type' => 'submit']) }}
                         {{ Form::button('CANCELAR', ['data-dismiss' => 'modal', 'aria-label' => 'Fechar', 'class' => 'btn btn-flat btn-default pull-right', 'type' => 'button']) }}
@@ -187,5 +179,4 @@ Admin - Usuários
         </div>
     </div>
 </div> <!-- FIM MODAL CONSULTA-FORNECEDOR -->
-
 @endsection

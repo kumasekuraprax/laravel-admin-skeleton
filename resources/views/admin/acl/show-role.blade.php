@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('page')
 
 @section('title')
 Admin - Editar Função {{ $role->name }}
@@ -34,7 +34,7 @@ Admin - Editar Função {{ $role->name }}
             <h4>
                 Editando Função | {{ $data['role']->name }}
                 <span class="pull-right-container">
-                    <a href="{{ route('permissao') }}" class="btn btn-default btn-flat pull-right">
+                    <a href="{{ route('acl.index') }}" class="btn btn-default btn-flat pull-right">
                         CANCELAR
                     </a>
                     {{ Form::button('<i class="fa fa-repeat"></i> ATUALIZAR', ['class' => 'btn btn-flat btn-success pull-right', 'name' => 'update-funcao', 'type' => 'submit']) }}

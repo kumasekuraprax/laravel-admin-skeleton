@@ -80,7 +80,7 @@
                                 
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{ route('usuarios.show', Auth::id()) }}" class="btn btn-default btn-flat">Meus Dados</a>
+                                        <a href="{{ route('usuarios.edit', Auth::id()) }}" class="btn btn-default btn-flat">Meus Dados</a>
                                     </div>
                                     <div class="pull-right">
                                         <a class="btn btn-danger btn-flat" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
