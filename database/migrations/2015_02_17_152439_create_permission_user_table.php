@@ -12,7 +12,7 @@ class CreatePermissionUserTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('permission_user', function (Blueprint $table) {
+		Schema::create('permission_usuario', function (Blueprint $table) {
 			$table->increments('id');
 			$table->integer('permission_id')->unsigned()->index()->references('id')->on('permissions')->onDelete('cascade');
 			$table->integer('usuario_id')->unsigned()->index()->references('id')->on('usuarios')->onDelete('cascade');

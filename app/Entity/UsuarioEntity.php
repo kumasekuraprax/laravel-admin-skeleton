@@ -73,4 +73,57 @@ class UsuarioEntity
             ];
         }
     }
+
+
+    public function alterSlugUser($id, $permissao, $slug)
+    {
+        try {
+            DB::beginTransaction();
+
+            $alias = "$slug.$permissao";
+            $usuario = Usuario::find($id);
+            $permission = Permission::whereName($permissao)->first();
+
+            /* Captura a permissao atual e monta o slug*/
+            $permissao_user = $usuario->getPermissions();
+
+            if (empty($permissao_user) || !isset($permissao_user[$permissao])) {
+                $acao = $permission->slug;
+            } else {
+                $acao = $permissao_user[$permissao];
+            }
+            $acao[$slug] = $acao[$slug] == true ? false : true;
+
+            /* Monta o array da permissao */
+            $arr = [
+                'name' => $permissao,
+                'slug' => $acao,
+                'inherit_id' => $permission->getKey(),
+                'description' => $permission->description
+            ];
+
+            /* Remove a permissao atual */
+            $usuario->removePermission($permissao);
+
+            /* Verifica se a permissao atual existe */
+            $new_permission = Permission::whereName($permissao)->whereSlug(json_encode($acao))->first();
+            
+            if (!$new_permission || $new_permission->count() == 0) {
+                $new_permission = Permission::create($arr);
+            }
+            $usuario->assignPermission($new_permission->id);
+
+            DB::commit();
+            return ['status' => true];
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return [
+                'status' => false,
+                'error' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ];
+        }
+    }
 }

@@ -18,7 +18,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return view('admin.usuarios.index', ['usuarios' => Usuario::all()]);
+        return view('admin.usuarios.index', ['usuarios' => Usuario::all(), 'roles' => Role::pluck('name', 'id')]);
     }
 
     /**

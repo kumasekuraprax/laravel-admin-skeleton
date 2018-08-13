@@ -39,7 +39,7 @@ class AclEntity
                 unset($data['acl_id']);
 
                 if ($type == 'função') {
-                    $role = Role::where('id', $id)->update($data);
+                    $acl = Role::where('id', $id)->update($data);
                 } else {
                     $slugs = [];
                     foreach ($data['slug'] as $k => $v) {
@@ -47,12 +47,12 @@ class AclEntity
                     }
                     $data['slug'] = $slugs;
 
-                    $permissao = Permission::where('id', $id)->update($data);
+                    $acl = Permission::where('id', $id)->update($data);
                 }
             }
             
             DB::commit();
-            return ['status' => true, 'id' => $usuario->id];
+            return ['status' => true, 'id' => $acl->id];
         } catch (Exception $e) {
             DB::rollBack();
 
