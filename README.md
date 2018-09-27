@@ -21,10 +21,10 @@ _Ambiente desenvolvimento com Docker_
 ## Passo a Passo
 
 ### 1. Tardis
-Realize o clone do projeto da Tardis (https://github.com/madeiramadeirabr/tardis)
+Realize o clone do projeto da Tardis
 
 ### 2. LAS
-Baixe o pacote do Laravel-Admin-Skeleton na mesmo diretorio da Tardis, atraves do comando
+Baixe o pacote do Laravel-Admin-Skeleton, atraves do comando
 > composer create-project anluizmm/laravel-admin-skeleton {project_name}
 
 ### 3. Subindo o Ambiente
@@ -42,6 +42,7 @@ Ainda na Tardis, na área de usuários, vincule o seu usuario ao seu projeto.
 Por fim na pasta do seu projeto realize o migrate com o comando > php artisan migrate
 
 OBS: Você pode adicionar o seu usuário no arquivo de migration da tabela usuarios, ou então adicionar manualmente no banco de dados
+OBS2: Será necessário realizar ajustes de permissão de pastas, como storage e bootstrap
 
 Acesse seu projeto pela URL http://localhost:8881
 
