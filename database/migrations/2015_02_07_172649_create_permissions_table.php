@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 
 class CreatePermissionsTable extends Migration
 {
@@ -22,6 +23,15 @@ class CreatePermissionsTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
         });
+
+        DB::table('permissions')->insert([
+            [
+                'inherit_id' => null,
+                'name' => 'dashboard',
+                'slug' => '{"view":true}',
+                'description' => 'Modulo Dashboard'
+            ]
+        ]);
     }
 
     /**
@@ -33,5 +43,4 @@ class CreatePermissionsTable extends Migration
     {
         Schema::drop('permissions');
     }
-
 }

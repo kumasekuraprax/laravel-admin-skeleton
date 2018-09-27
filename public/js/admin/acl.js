@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+    
     trigger = {
         saveAcl: function(data) { 
             $.post('/admin/acl', data, function (response) {
@@ -8,6 +8,10 @@ $(document).ready(function() {
                         text: 'Ação realizada com sucesso!',
                         icon: 'success'
                     });
+
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 2000);
                 } else {
                     swal({
                         text: 'Não foi possivel realizar a ação!',

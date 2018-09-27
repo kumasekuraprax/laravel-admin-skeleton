@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Portal Fornecedores | @yield('title')</title>
+    <title>{{ config('app.name') }} | @yield('title')</title>
     <link rel="shortcut icon" href="{{{ asset('images/favicon.ico') }}}">
 
     <!-- CSRF Token -->
@@ -29,7 +29,7 @@
 
     @if(config('adminlte.plugins.datatables'))
     <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.dataTable.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.dataTable.css') }}">
     @endif
 
     @yield('adminlte_css')
@@ -45,6 +45,11 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style type="text/css">
+        .clearblock {
+            clear: both;
+        }
+    </style>
 </head>
 <body class="hold-transition @yield('body_class')">
     <div class="content-fluid">
@@ -68,6 +73,15 @@
         @endif
 
         @yield('adminlte_js')
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.select2').select2();
+
+                $('.dataTables_filter input[type=search]').attr('placeholder', 'Pesquisar').addClass('form-control');
+                $('.dataTables_length select').addClass('form-control');
+                $('.dataTables_paginate').addClass('pull-right');
+            });
+        </script>
     </div> <!-- FIM div.content-fluid -->
 
 </body>

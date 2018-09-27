@@ -32,7 +32,7 @@ Admin - Editar Função {{ $role->name }}
 
         <div class="box-header with-border">
             <h4>
-                Editando Função | {{ $data['role']->name }}
+                Editando Função | {{ $role->name }}
                 <span class="pull-right-container">
                     <a href="{{ route('acl.index') }}" class="btn btn-default btn-flat pull-right">
                         CANCELAR

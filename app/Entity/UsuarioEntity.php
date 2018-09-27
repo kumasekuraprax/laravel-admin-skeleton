@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Exceptions\Exception;
+use App\Models\Permission;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +34,7 @@ class UsuarioEntity
             DB::commit();
 
             return ['status' => true, 'id' => $usuario->id];
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             return [
@@ -62,7 +63,7 @@ class UsuarioEntity
             DB::commit();
 
             return ['status' => true];
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             return [
@@ -115,7 +116,7 @@ class UsuarioEntity
 
             DB::commit();
             return ['status' => true];
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             return [

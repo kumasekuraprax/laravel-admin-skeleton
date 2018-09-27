@@ -1,12 +1,14 @@
 @extends('master')
 
+@php $skin = config('adminlte.skin') == null ? blue-light : config('adminlte.skin'); @endphp
+
 @section('adminlte_css')
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/skins/skin-blue-light.min.css')}} ">
+    <link rel="stylesheet" href="{{ asset('css/adminlte/skins/skin-' . $skin . '.min.css')}} ">
     @stack('css')
     @yield('css')
 @stop
 
-@section('body_class', 'skin-blue-light sidebar-mini ' . (config('adminlte.layout') ? [
+@section('body_class', 'skin-' . $skin . ' sidebar-mini ' . (config('adminlte.layout') ? [
     'boxed' => 'layout-boxed',
     'fixed' => 'fixed',
     'top-nav' => 'layout-top-nav'
@@ -143,7 +145,7 @@
 @stop
 
 @section('adminlte_js')
-    <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('js/adminlte/adminlte.min.js') }}"></script>
     <script src="{{ asset('js/maskJS/src/jquery.mask.js') }}"></script>
     <script src="{{ asset('js/maskMoneyJS/src/jquery.maskMoney.js') }}"></script>
     @stack('js')

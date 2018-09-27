@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 
 class CreateRolesTable extends Migration
 {
@@ -20,6 +21,14 @@ class CreateRolesTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
         });
+
+        DB::table('roles')->insert([
+            [
+                'name' => 'SuperAdmin',
+                'slug' => 'superadmin',
+                'description' => 'Função exclusiva para desenvolvedores'
+            ]
+        ]);
     }
 
     /**
@@ -31,5 +40,4 @@ class CreateRolesTable extends Migration
     {
         Schema::drop('roles');
     }
-
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entity\AclEntity;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -67,7 +68,7 @@ class AclController extends Controller
             } else {
                 throw new Exception($response);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             report($e);
 
             return response()->json(['status' => false]);
@@ -93,7 +94,7 @@ class AclController extends Controller
             } else {
                 throw new Exception($response);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             report($e);
             return redirect()->route('acl.edit', $id)->with('danger', 'Não foi possivel criar a ' . ucfirst($request->type) . '!');
         }

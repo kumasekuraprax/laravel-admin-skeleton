@@ -109,10 +109,14 @@ return [
 
     'menu' => [
         [
+            'header'    => 'DASHBOARD'
+        ],
+
+        [
             'text'      => 'DASHBORAD',
             'route'     => 'dashboard',
             'icon'      => 'tachometer-alt',
-            'can'       => 'menu-superadmin'
+            'can'       => 'view.dashboard'
         ],
 
         [
@@ -122,7 +126,6 @@ return [
             'text'      => 'CONTROLES',
             'icon'      => 'cog',
             'active'    => ['admin/*'],
-            'can'       => 'menu-superadmin',
             'submenu'   => [
                 [
                     'text'      => 'Usuários',

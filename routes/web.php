@@ -12,6 +12,9 @@
 */
 
 Auth::routes();
+Route::get('/login', function () {
+    return redirect('/');
+})->name('login');
 
 /**
  *----------------------------------
@@ -23,43 +26,45 @@ Auth::routes();
 Route::get('/', function () {
     return redirect(config('app.tardis_url') . "login/" . config('app.tardis_request'));
 });
-Route::post('/tardis/valida', 'Access\TardisController@valida');
-Route::get('/tardis/valida', 'Access\TardisController@valida');
-Route::get('/tardis/usuarios/{cpf}/update-password', 'Access\TardisController@updatePassword')->name('tardis-update-password');
 
-
-/**
- *----------------------------------
- *  Rotas Dashboard
- *----------------------------------
- * [ /dashboard ] Rota principal após o login já realizado
- */
-Route::prefix('dashboard')->group(function () {
-    Route::get('/', 'DashboardController@index')->name('dashboard');
+Route::prefix('tardis')->group(function () {
+    Route::post('valida', 'Access\TardisController@valida');
+    Route::get('usuarios/{cpf}/update-password', 'Access\TardisController@updatePassword')->name('tardis-update-password');
 });
 
 
-/**
- *----------------------------------
- *  Rotas Admin
- *----------------------------------
- * [ GET /admin/{route_name} ] Listagem de Usuarios padrões
- * [ GET /admin/{route_name}/create ] View para criar um novo usuário
- * [ GET /admin/{route_name}/{id}/edit ] View para editar um usuário existente
- * [ POST /admin/{route_name} ] Grava um novo usuario no Banco
- * [ PUT /admin/{route_name}/{id} ] Atualiza um usuário no Banco
- * [ DELETE /admin/{route_name}/{id} ] Apaga um usuário no Banco
- */
-Route::prefix('admin')->group(function () {
-    Route::resources([
-        'usuarios' => 'UsuarioController',
-        'acl' => 'AclController'
-    ]);
+Route::middleware(['auth', 'debugger'])->group(function () {
 
-    /* Extras for ACL */
-    Route::get('acl/role/{id}/show', 'AclController@showRole')->name('acl.show-role');
-    Route::get('/acl/role/{id}/alter-permission/{permission}/slug/{slug}', 'AclController@alterSlugRole');
+    /**
+     *----------------------------------
+     *  Rotas Dashboard
+     *----------------------------------
+     * [ /dashboard ] Rota principal após o login já realizado
+     */
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-    /* Extras for Usuarios */
-    Route::get('/usuarios/{id}/alter-permission/{permission}/slug/{slug}', 'UsuariosController@alterSlugUser');
+    /**
+     *----------------------------------
+     *  Rotas Admin
+     *----------------------------------
+     * [ GET /admin/{route_name} ] Listagem de Usuarios padrões
+     * [ GET /admin/{route_name}/create ] View para criar um novo usuário
+     * [ GET /admin/{route_name}/{id}/edit ] View para editar um usuário existente
+     * [ POST /admin/{route_name} ] Grava um novo usuario no Banco
+     * [ PUT /admin/{route_name}/{id} ] Atualiza um usuário no Banco
+     * [ DELETE /admin/{route_name}/{id} ] Apaga um usuário no Banco
+     */
+    Route::prefix('admin')->group(function () {
+        /* Extras for ACL */
+        Route::get('acl/role/{id}/show', 'AclController@showRole')->name('acl.show-role');
+        Route::get('acl/role/{id}/alter-permission/{permission}/slug/{slug}', 'AclController@alterSlugRole');
+
+        /* Extras for Usuarios */
+        Route::get('usuarios/{id}/alter-permission/{permission}/slug/{slug}', 'UsuarioController@alterSlugUser');
+
+        Route::resources([
+            'usuarios' => 'UsuarioController',
+            'acl' => 'AclController',
+        ]);
+    });
 });

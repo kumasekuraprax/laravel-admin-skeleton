@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+    
     trigger = {
         alterSlugUser(id, permissao, slug) {
             $.get('/admin/usuarios/' + id + '/alter-permission/' + permissao + '/slug/' + slug, function (response) {

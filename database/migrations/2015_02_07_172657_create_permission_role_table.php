@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 
 class CreatePermissionRoleTable extends Migration
 {
@@ -21,6 +22,13 @@ class CreatePermissionRoleTable extends Migration
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->timestamps();
         });
+
+        DB::table('permission_role')->insert([
+            [
+                'permission_id' => 1,
+                'role_id' => 1
+            ]
+        ]);
     }
 
     /**
@@ -32,5 +40,4 @@ class CreatePermissionRoleTable extends Migration
     {
         Schema::drop('permission_role');
     }
-
 }

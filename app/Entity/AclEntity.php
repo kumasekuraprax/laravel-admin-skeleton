@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class AclEntity
 {
     /**
-     * Create or update a User
+     * Create or update a Role or Permission
      *
      * @return bollean
      */
@@ -53,7 +53,7 @@ class AclEntity
             
             DB::commit();
             return ['status' => true, 'id' => $acl->id];
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             return [
@@ -65,7 +65,7 @@ class AclEntity
         }
     }
 
-    public function alterSlugRole($id, $permission, $slug)
+    public function alterSlugRole($id, $permissao, $slug)
     {
         try {
             DB::beginTransaction();
@@ -105,7 +105,7 @@ class AclEntity
 
             DB::commit();
             return ['status' => true];
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
             return [

@@ -1,3 +1,7 @@
+@if(isset($item['can']) && !Auth::user()->can($item['can']))
+    @php return @endphp
+@endif
+
 @if (array_key_exists("header", $item))
     <li class="header">{{ $item['header'] }}</li>
 @else

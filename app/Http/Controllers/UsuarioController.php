@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Entity\UsuarioEntity;
-use App\Exceptions\Exception;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Usuario;
@@ -48,7 +47,7 @@ class UsuarioController extends Controller
             } else {
                 throw new Exception($response);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             report($e);
             return redirect()->route('usuarios.create')->with('danger', 'Não foi possivel criar o perfil!');
         }
@@ -87,7 +86,7 @@ class UsuarioController extends Controller
             } else {
                 throw new Exception($response);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             report($e);
             return redirect()->route('usuarios.edit', $id)->with('danger', 'Não foi possivel atualizar o perfil!');
         }
@@ -110,7 +109,7 @@ class UsuarioController extends Controller
             } else {
                 throw new Exception($response);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             report($e);
             return redirect()->route('usuarios.create')->with('danger', 'Não foi possivel excluir o perfil!');
         }
@@ -126,7 +125,7 @@ class UsuarioController extends Controller
     {
         try {
             $usuarioEntity = new UsuarioEntity();
-            $response = $usuarioEntity->alterSlugRole($id, $permission, $slug);
+            $response = $usuarioEntity->alterSlugUser($id, $permission, $slug);
 
             if ($response['status']) {
                 return response()->json(['status' => true]);
