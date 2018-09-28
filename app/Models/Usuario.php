@@ -27,4 +27,30 @@ class Usuario extends Authenticatable
     protected $hidden = [
         'remember_token',
     ];
+
+    /* @Override */
+    public function removePermission($name)
+    {
+        $id = $this->getAttribute('id');
+        $slugs = $this->permissions->keyBy('name');
+        list($slug, $alias) = $this->extractAlias($name);
+
+        /* Remove a referencia da permissao com o usuário */
+        if ($slugs->has($alias) && is_null($slug)) {
+            $permission_user = DB::delete('delete from permission_usuario where usuario_id = ? AND permission_id = ?', [$id, $slugs[$alias]->id]);
+        }
+
+        return true;
+    }
+
+    /* @Override */
+    protected function extractAlias($str)
+    {
+        preg_match('/([^.].*)[\.]([^\s].*?)$/i', $str, $m);
+
+        return [
+            isset($m[1]) ? $m[1] : null, //slug
+            isset($m[2]) ? $m[2] : $str, //alias
+        ];
+    }
 }
