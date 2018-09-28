@@ -19,7 +19,7 @@
 
                 <div class="col-md-6">
                     <label><b>alias *</b></label>
-                    {{ Form::text('slug', null, ['class' => 'form-control']) }}
+                    {{ Form::text('slug', null, ['class' => 'form-control lowerlabel']) }}
                 </div>
 
                 <div class="col-md-12">
@@ -55,7 +55,7 @@
             <div class="modal-body">
                 <div class="col-md-6">
                     <label><b>Permissão *</b></label>
-                    {{ Form::text('permissao', null, ['class' => 'form-control']) }}
+                    {{ Form::text('permissao', null, ['class' => 'form-control lowerlabel']) }}
                 </div>
 
                 <div class="col-md-12">
@@ -66,7 +66,7 @@
 
                 <div class="col-md-3">
                     <br><label><b>Ações</b></label>
-                    {{ Form::text('acao_1', 'view', ['class' => 'form-control acoes']) }}
+                    {{ Form::text('acao_1', 'view', ['class' => 'form-control acoes lowerlabel']) }}
                 </div>
                 <span class="more_actions"></span>
                 <div class="col-md-1">

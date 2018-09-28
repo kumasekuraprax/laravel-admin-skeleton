@@ -93,7 +93,7 @@ $(document).ready(function() {
         qntAcoes = $('input.acoes').length + 1;
         html = '<div class="col-md-3">'
              + '<br><label>&nbsp;</label>'
-             + '<input name="acao_' + qntAcoes + '" type="text" class="form-control acoes">'
+             + '<input name="acao_' + qntAcoes + '" type="text" class="form-control acoes lowerlabel">'
              + '</div>';
 
         $('.more_actions').append(html);
@@ -130,5 +130,9 @@ $(document).ready(function() {
         role_id = $('input[name=acl_id]').val();
 
         trigger.alterSlugRole(role_id, permissao, slug);
+    });
+
+    $('.lowerlabel').keyup(function () {
+        $(this).val($(this).val().replace(/\W+/g, '-').toLowerCase());
     });
 });

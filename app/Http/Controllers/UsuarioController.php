@@ -45,7 +45,7 @@ class UsuarioController extends Controller
             if ($response['status']) {
                 return redirect()->route('usuarios.edit', $response['id'])->with('success', 'Perfil criado com sucesso!');
             } else {
-                throw new Exception($response);
+                throw new \Exception($response);
             }
         } catch (\Exception $e) {
             report($e);

@@ -20,7 +20,7 @@ class UsuarioEntity
         try {
             DB::beginTransaction();
 
-            $role = $data['funcao'];
+            $role = $data['funcao'] ?? null;
             unset($data['funcao']);
             if ($action == 'create') {
                 $usuario = Usuario::create($data);
