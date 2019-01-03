@@ -11,6 +11,7 @@
             </thead>
             <tbody>
                 @foreach($permissions as $item)
+                    @continue($item->inherit_id != null)
                     <tr>
                         <td> {{ $item->id }} </td>
                         <td> {{ $item->name }} </td>

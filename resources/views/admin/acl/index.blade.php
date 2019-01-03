@@ -24,6 +24,36 @@ Admin - ACL (Controle de Acessos)
 @stop
 
 @section('content')
+
+<div class="box box-solid">
+    <div class="nav-tabs-custom">
+        <div class="box-body">
+            <div class="col-xs-12 col-md-6 col-lg-6">
+                <h5> <i class="fa fa-book"></i> COMO UTILIZAR O RECURSO DE <b>FUNÇÕES</b> DO ACL </h5> <hr />
+
+                <label> <small>Verificando se o usuario possui uma ou varias funções atreladas</small> </label>
+                <pre><em><b>EM CONTROLLER / SERVICES / REPOSITORY / ETC</b></em> <br /><br />Auth::user()->hasRole('admin') <br />Auth::user()->hasRole('admin|comercial|financeiro')</pre>
+
+                <br /> <hr />
+
+                <pre><em><b>BLADE</b></em> <br /><br />_@role('admin') [... html .. ] _@endrole<br />_@role('admin|comercial|financeiro') [... html ...] _@endrole</pre>
+            </div>
+
+            <div class="col-xs-12 col-md-6 col-lg-6">
+                <h5> <i class="fa fa-book"></i> COMO UTILIZAR O RECURSO DE <b>PERMISSÕES</b> DO ACL </h5> <hr />
+
+                <label> <small>Verificando se o usuario possui uma ou varias permissões</small> </label>
+                <pre><em><b>EM CONTROLLER / SERVICES / REPOSITORY / ETC</b></em> <br /><br />Auth::user()->can('create.usuarios') <br />Auth::user()->can('create.usuarios|update.usuarios')</pre>
+
+                <br /> <hr />
+
+                <pre><em><b>BLADE</b></em> <br /><br />_@permission('create.usuarios') [... html ...] _@endpermission <br />_@permission('create.usuarios|update.usuarios') [... html ...] _@endpermission</pre>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearblock"></div>
+
 {{ Form::hidden('_token', csrf_token()) }}
 <div class="box box-warning">
     <div class="nav-tabs-custom" style="margin-top: 20px;">

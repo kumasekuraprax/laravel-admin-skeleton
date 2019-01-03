@@ -28,6 +28,10 @@ class TardisController extends Controller
             $usuario = json_decode($jsonUser, true)['usuario'];
             $user = Usuario::where('cpf', $usuario['cpf'])->first();
             
+            if (!$user) {
+                return redirect('/');
+            }
+
             Auth::login($user);
         } else {
             echo 'Sem request!';
@@ -72,7 +76,7 @@ class TardisController extends Controller
     {
         $user = Usuario::find($id);
 
-        if (Usuario::where('id', $id)->count() == 0) {
+        if (!$user) {
             return response()->json([
                 'status'    => 'Falha',
                 'message'   => 'Usuario não encontrado!'
